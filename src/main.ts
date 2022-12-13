@@ -6,6 +6,7 @@ import { routerWithStore } from './router'
 import random from 'lodash/random'
 import 'highlight.js/styles/atom-one-dark.css'
 import { store, storeKey, User, Author } from './store'
+import VSscroll from '@/directives/VSscroll'
 
 function delay() {
   return new Promise(res => {
@@ -86,8 +87,15 @@ axios.put = async (url: string, payload: any) => {
 
 
 const app = createApp(App)
+
+
+app.directive('scroll', VSscroll);
+
+
 const router = routerWithStore(store)
 app.use(router)
 app.use(store)
+
+
 
 app.mount('#app')
