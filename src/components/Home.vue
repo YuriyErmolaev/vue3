@@ -3,7 +3,6 @@
     <template #default>
       <timeline />
     </template>
-
     <template #fallback>
       <spinner />
     </template>

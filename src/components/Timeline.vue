@@ -17,6 +17,8 @@
       </a>
     </span>
 
+     TimeLine
+
     <timeline-post
       v-for="post in posts"
       :key="post.id"

@@ -1,43 +1,56 @@
 <template>
   <div class="navbar">
     <div class="navbar-end">
-      <div 
-        class="buttons"
-        v-if="auth"
-      >
+      
+      <div
+          class="buttons"     
+      > 
+
         <router-link 
           class="button"
-          to="/posts/new"
+          to="/"
+          v-if="curRoutePath != '/'"          
         >
-          New Post
-        </router-link>
+          Go Home
+        </router-link>        
 
-        <button
-          class="button"
-          @click="signOut"
+        <template          
+          v-if="auth"
         >
-          Sign Out
-        </button>
-      </div>
+          <router-link 
+            class="button"
+            to="/posts/new"
+          >
+            New Post
+          </router-link>
 
-      <div 
-        class="buttons"
-        v-else
-      >
-        <button
-          class="button"
-          data-test="sign-up"
-          @click="signUp"
-        >
-          Sign Up
-        </button>
+          <button
+            class="button"
+            @click="signOut"
+          >
+            Sign Out
+          </button>
+        </template>
 
-        <button
-          class="button"
-          @click="signIn"
+        <template          
+          v-else
         >
-          Sign In
-        </button>
+          <button
+            class="button"
+            data-test="sign-up"
+            @click="signUp"
+          >
+            Sign Up
+          </button>
+
+          <button
+            class="button"
+            @click="signIn"
+          >
+            Sign In
+          </button>
+        </template>
+
       </div>
 
     </div>
@@ -66,6 +79,10 @@ export default defineComponent({
     const store = useStore()
     const router = useRouter()
 
+    const curRoutePath = computed(() => {
+      return router.currentRoute.value.path
+    })    
+    
     const auth = computed(() => {
       return !!store.getState().authors.currentUserId
     })
@@ -90,7 +107,8 @@ export default defineComponent({
       signIn,
       signUp,
       signOut,
-      auth,
+      auth,      
+      curRoutePath
     }
   }
 });
